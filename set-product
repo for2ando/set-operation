@@ -1,0 +1,15 @@
+#!/bin/bash
+pname=$(basename "$0")
+usage="$pname SetFile1 SetFile2
+FEATURES
+  Ask a product (or a intersection) of two sets, and output stdout.
+OPTIONS
+  SetFile1
+    A file that considered to be a set in which each line is a element of the
+    set.
+  SetFile2
+    A second set."
+
+test $# -lt 2 && { echo "$usage"; exit 0; }
+
+join -t '' <(sort -u "$1") <(sort -u "$2")

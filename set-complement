@@ -1,0 +1,21 @@
+#!/bin/bash
+pname=$(basename "$0")
+usage="$pname SetFile1 SetFile2
+FEATURES
+  Ask a complement (or a difference) of two sets, and output stdout.
+  In general, a result is differ between:
+    $pname file1 file2
+  and
+    $pname file2 file1
+  The former result set includes elements in file1, but not in file2, and
+  the latter result set includes elements in file2, but not in file1.
+OPTIONS
+  SetFile1
+    A file that considered to be a set in which each line is a element of the
+    set.
+  SetFile2
+    A second set."
+
+test $# -lt 2 && { echo "$usage"; exit 0; }
+
+join -t '' -v 1 <(sort -u "$1") <(sort -u "$2")
